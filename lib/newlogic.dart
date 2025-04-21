@@ -2,14 +2,15 @@ import 'package:flutter/material.dart'; // استيراد مكتبة تصميم 
 import 'package:my_smartapp/surenew.dart'; // استيراد صفحة التحقق بعد التسجيل
 
 class Newlogic extends StatefulWidget {
-  const Newlogic({Key? key}) : super(key: key);
+  const Newlogic({super.key});
 
   @override
   State<Newlogic> createState() => _NewlogicState(); // ربط الكلاس بالـ state
 }
 
 class _NewlogicState extends State<Newlogic> {
-  final _formKey = GlobalKey<FormState>(); // مفتاح لربط النموذج مع التحقق من الحقول
+  final _formKey =
+      GlobalKey<FormState>(); // مفتاح لربط النموذج مع التحقق من الحقول
 
   bool isChecked = false; // لحفظ حالة زر "تذكرني"
 
@@ -29,19 +30,23 @@ class _NewlogicState extends State<Newlogic> {
         color: Color(0xFFC40CC4).withOpacity(0.6), // لون عنوان الحقل
       ),
       suffixIcon: suffix, // عنصر مضاف في نهاية الحقل (مثل زر أو checkbox)
-      enabledBorder: OutlineInputBorder( // شكل الحقل عند الحالة العادية
+      enabledBorder: OutlineInputBorder(
+        // شكل الحقل عند الحالة العادية
         borderSide: BorderSide(color: Color(0xFFC40CC4), width: 1),
         borderRadius: BorderRadius.circular(12),
       ),
-      focusedBorder: OutlineInputBorder( // شكل الحقل عند التركيز
+      focusedBorder: OutlineInputBorder(
+        // شكل الحقل عند التركيز
         borderSide: BorderSide(color: Color(0xFFC40CC4), width: 2),
         borderRadius: BorderRadius.circular(12),
       ),
-      errorBorder: OutlineInputBorder( // شكل الحقل عند وجود خطأ
+      errorBorder: OutlineInputBorder(
+        // شكل الحقل عند وجود خطأ
         borderSide: BorderSide(color: Colors.red),
         borderRadius: BorderRadius.circular(12),
       ),
-      focusedErrorBorder: OutlineInputBorder( // شكل الحقل عند الخطأ والتركيز
+      focusedErrorBorder: OutlineInputBorder(
+        // شكل الحقل عند الخطأ والتركيز
         borderSide: BorderSide(color: Colors.red),
         borderRadius: BorderRadius.circular(12),
       ),
@@ -50,12 +55,14 @@ class _NewlogicState extends State<Newlogic> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp( // بداية التطبيق المصغر داخل الصفحة
+    return MaterialApp(
+      // بداية التطبيق المصغر داخل الصفحة
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light(useMaterial3: true), // تفعيل تصميم Material 3
       home: Scaffold(
         backgroundColor: Colors.white,
-        body: Stack( // ترتيب العناصر فوق بعض
+        body: Stack(
+          // ترتيب العناصر فوق بعض
           children: [
             // زر الإغلاق للرجوع
             Positioned(
@@ -109,29 +116,34 @@ class _NewlogicState extends State<Newlogic> {
             ),
             // الحاوية الرئيسية البيضاء لحقول الإدخال
             Center(
-              child: SingleChildScrollView( // لدعم التمرير في الأجهزة الصغيرة
+              child: SingleChildScrollView(
+                // لدعم التمرير في الأجهزة الصغيرة
                 padding: const EdgeInsets.only(top: 180),
                 child: Container(
-                  width: MediaQuery.of(context).size.width * 0.85, // 85٪ من عرض الشاشة
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+                  width: MediaQuery.of(context).size.width *
+                      0.85, // 85٪ من عرض الشاشة
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(color: Colors.grey.shade300),
-                    boxShadow: [ // ظل الحاوية
+                    boxShadow: const [
+                      // ظل الحاوية
                       BoxShadow(
                         color: Colors.black12,
                         blurRadius: 6,
-                        offset: const Offset(0, 2),
+                        offset: Offset(0, 2),
                       ),
                     ],
                   ),
-                  child: Form( // لربط الحقول بالتحقق منها
+                  child: Form(
+                    // لربط الحقول بالتحقق منها
                     key: _formKey,
                     child: Column(
                       children: [
                         const SizedBox(height: 10),
-                        
+
                         // حقل اسم المستخدم
                         TextFormField(
                           controller: usernameController,
@@ -166,7 +178,8 @@ class _NewlogicState extends State<Newlogic> {
                                     color: Color(0xFFC40CC4),
                                   ),
                                 ),
-                                Checkbox( // مربع "تذكرني"
+                                Checkbox(
+                                  // مربع "تذكرني"
                                   value: isChecked,
                                   onChanged: (value) {
                                     setState(() {
@@ -247,7 +260,8 @@ class _NewlogicState extends State<Newlogic> {
                           width: double.infinity,
                           height: 50,
                           decoration: const BoxDecoration(
-                            gradient: LinearGradient( // تدرج لوني للزر
+                            gradient: LinearGradient(
+                              // تدرج لوني للزر
                               colors: [
                                 Color(0xFFC40CC4),
                                 Color(0xFF381DFF),
@@ -272,7 +286,8 @@ class _NewlogicState extends State<Newlogic> {
                                 // إذا تم التحقق من الحقول → انتقل لصفحة Surenew
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => const Surenew()),
+                                  MaterialPageRoute(
+                                      builder: (context) => const Surenew()),
                                 );
                               }
                             },

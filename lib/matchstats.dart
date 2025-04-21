@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_smartapp/Injuriesdeta.dart';
 import 'package:my_smartapp/Matchstatsdatem.dart';
-import 'package:my_smartapp/perform.dart';
 
 class Matchstats extends StatelessWidget {
   const Matchstats({super.key});
@@ -83,7 +81,8 @@ class Matchstats extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-"يعرض هذا القسم تفاصيل دقيقة عن المباراة مثل عدد التمريرات، الاستحواذ، عدد التسديدات على المرمى، البطاقات، والزوايا. هذه البيانات تساعد المدربين والمحللين في اتخاذ قرارات تكتيكية وتحسين الاستراتيجية للمباريات القادمة"        ,          style: const TextStyle(
+                  "يعرض هذا القسم تفاصيل دقيقة عن المباراة مثل عدد التمريرات، الاستحواذ، عدد التسديدات على المرمى، البطاقات، والزوايا. هذه البيانات تساعد المدربين والمحللين في اتخاذ قرارات تكتيكية وتحسين الاستراتيجية للمباريات القادمة",
+                  style: const TextStyle(
                     color: Color(0xFF381DFF),
                     fontFamily: 'Cairo',
                     fontSize: 20,

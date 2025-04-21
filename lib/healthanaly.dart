@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_smartapp/healthydeterm.dart';
-import 'package:my_smartapp/perform.dart';
 
 class Healthanaly extends StatelessWidget {
   const Healthanaly({super.key});
-  
- 
-
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +41,7 @@ class Healthanaly extends StatelessWidget {
                 ),
                 const Spacer(),
                 const Text(
-                'التحليل الصحي',
+                  'التحليل الصحي',
                   style: TextStyle(
                     color: Color(0xFFC40CC4),
                     fontWeight: FontWeight.bold,
@@ -85,13 +81,13 @@ class Healthanaly extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-"هذا التحليل يركز على الجوانب الصحية للرياضي أو المستخدم، مثل قياسات اللياقة البدنية، معدل ضربات القلب، جودة النوم، التغذية، ومتابعة الحالات الصحية. يساعد في الكشف المبكر عن المشاكل الصحية وتحسين الأداء العام من خلال التوجيه الطبي المناسب."        ,          style: const TextStyle(
+                  "هذا التحليل يركز على الجوانب الصحية للرياضي أو المستخدم، مثل قياسات اللياقة البدنية، معدل ضربات القلب، جودة النوم، التغذية، ومتابعة الحالات الصحية. يساعد في الكشف المبكر عن المشاكل الصحية وتحسين الأداء العام من خلال التوجيه الطبي المناسب.",
+                  style: const TextStyle(
                     color: Color(0xFF381DFF),
                     fontFamily: 'Cairo',
                     fontSize: 20,
                     height: 1.6,
                     fontWeight: FontWeight.bold,
-                    
                   ),
                   textAlign: TextAlign.right,
                 ),
@@ -146,11 +142,6 @@ class Healthanaly extends StatelessWidget {
   }
 }
 
-
-
-
-
-
 // ويدجت الأزرار (بار داخلي)
 class CustomBottomBar extends StatelessWidget {
   const CustomBottomBar({super.key});
@@ -163,11 +154,17 @@ class CustomBottomBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: const [
           BottomNavItem(title: 'الإعدادات', route: '/Settings'),
-          SizedBox(height: 2,),
+          SizedBox(
+            height: 2,
+          ),
           BottomNavItem(title: 'AI Chat', route: '/chat'),
-          SizedBox(height: 2,),
-          BottomNavItem(title:  'التحليلات', route: '/Biganaly'),
-          SizedBox(height: 2,),
+          SizedBox(
+            height: 2,
+          ),
+          BottomNavItem(title: 'التحليلات', route: '/Biganaly'),
+          SizedBox(
+            height: 2,
+          ),
           BottomNavItem(title: 'الرئيسية', route: '/home'),
         ],
       ),

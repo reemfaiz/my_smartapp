@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_smartapp/Injuriesdeta.dart';
-import 'package:my_smartapp/perform.dart';
 
 class Injuries extends StatelessWidget {
   const Injuries({super.key});

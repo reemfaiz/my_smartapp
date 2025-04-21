@@ -26,7 +26,8 @@ class Chat extends StatelessWidget {
           // محتوى الصفحة
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
               child: Row(
                 children: [
                   GestureDetector(
@@ -57,7 +58,8 @@ class Chat extends StatelessWidget {
           // مربع التحليل الكبير
           Center(
             child: Padding(
-              padding: const EdgeInsets.only(top: 100, left: 24, right: 24, bottom: 180),
+              padding: const EdgeInsets.only(
+                  top: 100, left: 24, right: 24, bottom: 180),
               child: Container(
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height * 0.4,
@@ -80,7 +82,11 @@ class Chat extends StatelessWidget {
                 height: 45,
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Color(0xFF381DFF), Color(0xFF6A40F8), Color(0xFF1DFFE8)],
+                    colors: [
+                      Color(0xFF381DFF),
+                      Color(0xFF6A40F8),
+                      Color(0xFF1DFFE8)
+                    ],
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(12)),
                 ),

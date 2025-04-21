@@ -76,11 +76,11 @@ class _NopassState extends State<Nopass> {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(color: Colors.grey.shade300),
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                       color: Colors.black12,
                       blurRadius: 6,
-                      offset: const Offset(0, 2),
+                      offset: Offset(0, 2),
                     ),
                   ],
                 ),
@@ -101,8 +101,8 @@ class _NopassState extends State<Nopass> {
                             color: Color(0xFFC40CC4).withOpacity(0.6),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color(0xFFC40CC4), width: 1),
+                            borderSide:
+                                BorderSide(color: Color(0xFFC40CC4), width: 1),
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(12)),
                           ),
@@ -136,8 +136,8 @@ class _NopassState extends State<Nopass> {
                             color: Color(0xFFC40CC4).withOpacity(0.6),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color(0xFFC40CC4), width: 1),
+                            borderSide:
+                                BorderSide(color: Color(0xFFC40CC4), width: 1),
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(12)),
                           ),

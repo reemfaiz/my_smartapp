@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_smartapp/done.dart';
 
 class Surenew extends StatefulWidget {
-  const Surenew({Key? key}) : super(key: key);
+  const Surenew({super.key});
 
   @override
   State<Surenew> createState() => _SurenewState();
@@ -77,17 +77,17 @@ class _SurenewState extends State<Surenew> {
                 padding: const EdgeInsets.only(top: 100),
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.85,
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 24, vertical: 32),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(color: Colors.grey.shade300),
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         color: Colors.black12,
                         blurRadius: 6,
-                        offset: const Offset(0, 2),
+                        offset: Offset(0, 2),
                       ),
                     ],
                   ),
@@ -142,8 +142,8 @@ class _SurenewState extends State<Surenew> {
                                   ),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(8),
-                                    borderSide: const BorderSide(
-                                        color: Colors.red),
+                                    borderSide:
+                                        const BorderSide(color: Colors.red),
                                   ),
                                 ),
                                 validator: (value) {
@@ -174,8 +174,7 @@ class _SurenewState extends State<Surenew> {
                               begin: Alignment.centerLeft,
                               end: Alignment.centerRight,
                             ),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(12)),
+                            borderRadius: BorderRadius.all(Radius.circular(12)),
                           ),
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
@@ -194,7 +193,8 @@ class _SurenewState extends State<Surenew> {
                                       builder: (context) => const DONE()),
                                 );
                               } else {
-                                setState(() {}); // لإظهار رسالة الخطأ في المربعات
+                                setState(
+                                    () {}); // لإظهار رسالة الخطأ في المربعات
                               }
                             },
                             child: const Text(

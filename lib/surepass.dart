@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:my_smartapp/biganaly.dart';
 
 class Surepass extends StatelessWidget {
-  const Surepass({Key? key}) : super(key: key);
+  const Surepass({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +80,7 @@ class Surepass extends StatelessWidget {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(color: Colors.grey.shade300),
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         color: Colors.black12,
                         blurRadius: 6,
@@ -124,12 +124,10 @@ class Surepass extends StatelessWidget {
                           ),
                           onPressed: () {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>Biganaly(
-                                        
-                                        )),
-                              );
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Biganaly()),
+                            );
                           },
                           child: const Text(
                             "تم نغيير كلمة المرور",

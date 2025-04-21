@@ -73,25 +73,11 @@ class FF extends StatelessWidget {
             right: 0,
             child: CustomBottomBar(),
           ),
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
         ],
       ),
     );
   }
 }
-
-
 
 //  ويدجت الأزرار (بار داخلي)
 class CustomBottomBar extends StatelessWidget {
@@ -104,12 +90,18 @@ class CustomBottomBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: const [
-  BottomNavItem(title: 'الإعدادات', route: '/settings'),
-          SizedBox(height: 2,),
+          BottomNavItem(title: 'الإعدادات', route: '/settings'),
+          SizedBox(
+            height: 2,
+          ),
           BottomNavItem(title: 'AI Chat', route: '/chat'),
-          SizedBox(height: 2,),
-          BottomNavItem(title:  'التحليلات', route: '/analysis'),
-          SizedBox(height: 2,),
+          SizedBox(
+            height: 2,
+          ),
+          BottomNavItem(title: 'التحليلات', route: '/analysis'),
+          SizedBox(
+            height: 2,
+          ),
           BottomNavItem(title: 'الرئيسية', route: '/home'),
         ],
       ),
@@ -133,8 +125,7 @@ class BottomNavItem extends StatelessWidget {
       child: Container(
         width: 95,
         height: 95,
-        margin:
-            const EdgeInsets.all(0), //  مسافة بين الأزرار
+        margin: const EdgeInsets.all(0), //  مسافة بين الأزرار
         decoration: BoxDecoration(
           //  التدرج اللوني
           gradient: const LinearGradient(
@@ -142,7 +133,7 @@ class BottomNavItem extends StatelessWidget {
             end: Alignment.centerRight,
             colors: [
               Color(0xFFCEAAEE), // موف فاتح
-    Colors.white,   // #C40CC4 - 100% opacity
+              Colors.white, // #C40CC4 - 100% opacity
             ],
             stops: [0.0, 0.79],
           ),

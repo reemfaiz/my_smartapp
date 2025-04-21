@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class  Langu extends StatelessWidget {
+class Langu extends StatelessWidget {
   const Langu({super.key});
 
   @override
@@ -26,7 +26,8 @@ class  Langu extends StatelessWidget {
           // محتوى الصفحة
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
               child: Row(
                 children: [
                   GestureDetector(
@@ -41,7 +42,7 @@ class  Langu extends StatelessWidget {
                   ),
                   const Spacer(),
                   const Text(
-                  'تغيير اللغة',
+                    'تغيير اللغة',
                     style: TextStyle(
                       color: Color(0xFFC40CC4),
                       fontWeight: FontWeight.bold,
@@ -79,12 +80,13 @@ class  Langu extends StatelessWidget {
               padding: const EdgeInsets.only(top: 100),
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.85,
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(color: Colors.grey.shade300),
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                       color: Colors.black12,
                       blurRadius: 6,
@@ -141,7 +143,9 @@ class _LanguageSelectorState extends State<LanguageSelector> {
               },
               child: Container(
                 decoration: BoxDecoration(
-                  color: selectedLang == 'en' ? Color(0xFF381DFF) : Colors.transparent,
+                  color: selectedLang == 'en'
+                      ? Color(0xFF381DFF)
+                      : Colors.transparent,
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(10),
                     bottomLeft: Radius.circular(10),
@@ -151,7 +155,9 @@ class _LanguageSelectorState extends State<LanguageSelector> {
                   child: Text(
                     'Englesh',
                     style: TextStyle(
-                      color: selectedLang == 'en' ? Colors.white : Color(0xFF381DFF),
+                      color: selectedLang == 'en'
+                          ? Colors.white
+                          : Color(0xFF381DFF),
                       fontFamily: 'Cairo',
                       fontWeight: FontWeight.bold,
                     ),
@@ -169,7 +175,9 @@ class _LanguageSelectorState extends State<LanguageSelector> {
               },
               child: Container(
                 decoration: BoxDecoration(
-                  color: selectedLang == 'ar' ? Color(0xFF381DFF) : Colors.transparent,
+                  color: selectedLang == 'ar'
+                      ? Color(0xFF381DFF)
+                      : Colors.transparent,
                   borderRadius: const BorderRadius.only(
                     topRight: Radius.circular(10),
                     bottomRight: Radius.circular(10),
@@ -179,7 +187,9 @@ class _LanguageSelectorState extends State<LanguageSelector> {
                   child: Text(
                     'اللـغة العربية',
                     style: TextStyle(
-                      color: selectedLang == 'ar' ? Colors.white : Color(0xFF381DFF),
+                      color: selectedLang == 'ar'
+                          ? Colors.white
+                          : Color(0xFF381DFF),
                       fontFamily: 'Cairo',
                       fontWeight: FontWeight.bold,
                     ),

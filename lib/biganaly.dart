@@ -26,7 +26,8 @@ class Biganaly extends StatelessWidget {
           // محتوى الصفحة
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
               child: Row(
                 children: [
                   GestureDetector(
@@ -62,12 +63,17 @@ class Biganaly extends StatelessWidget {
                 crossAxisCount: 2,
                 mainAxisSpacing: 20,
                 crossAxisSpacing: 20,
-                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                 children: [
-                  _buildImageCard(context, 'assets/Frame-1984079920.png', '/Healthanaly'),
-                  _buildImageCard(context, 'assets/Frame-1984079921.png', '/AnalysisScreen'),
-                  _buildImageCard(context, 'assets/Frame-1984079923 (1).png', '/Injuries'),
-                  _buildImageCard(context, 'assets/Frame-1984079922.png', '/Matchstats'),
+                  _buildImageCard(
+                      context, 'assets/Frame-1984079920.png', '/Healthanaly'),
+                  _buildImageCard(context, 'assets/Frame-1984079921.png',
+                      '/AnalysisScreen'),
+                  _buildImageCard(
+                      context, 'assets/Frame-1984079923 (1).png', '/Injuries'),
+                  _buildImageCard(
+                      context, 'assets/Frame-1984079922.png', '/Matchstats'),
                 ],
               ),
             ),

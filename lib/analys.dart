@@ -3,9 +3,6 @@ import 'package:my_smartapp/perform.dart';
 
 class AnalysisScreen extends StatelessWidget {
   const AnalysisScreen({super.key});
-  
- 
-
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +88,6 @@ class AnalysisScreen extends StatelessWidget {
                     fontSize: 20,
                     height: 1.6,
                     fontWeight: FontWeight.bold,
-                    
                   ),
                   textAlign: TextAlign.right,
                 ),
@@ -146,11 +142,6 @@ class AnalysisScreen extends StatelessWidget {
   }
 }
 
-
-
-
-
-
 // ويدجت الأزرار (بار داخلي)
 class CustomBottomBar extends StatelessWidget {
   const CustomBottomBar({super.key});
@@ -163,11 +154,17 @@ class CustomBottomBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: const [
           BottomNavItem(title: 'الإعدادات', route: '/Settings'),
-          SizedBox(height: 2,),
+          SizedBox(
+            height: 2,
+          ),
           BottomNavItem(title: 'AI Chat', route: '/chat'),
-          SizedBox(height: 2,),
-          BottomNavItem(title:  'التحليلات', route: '/Biganaly'),
-          SizedBox(height: 2,),
+          SizedBox(
+            height: 2,
+          ),
+          BottomNavItem(title: 'التحليلات', route: '/Biganaly'),
+          SizedBox(
+            height: 2,
+          ),
           BottomNavItem(title: 'الرئيسية', route: '/home'),
         ],
       ),

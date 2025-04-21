@@ -5,9 +5,10 @@ import 'package:my_smartapp/biganaly.dart';
 import 'package:my_smartapp/newlogic.dart';
 import 'package:my_smartapp/nopass.dart';
 import 'package:my_smartapp/page.dart';
+import 'package:my_smartapp/views/features/dashboard.dart';
 
 class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+  const Login({super.key});
 
   @override
   State<Login> createState() => _LoginState();
@@ -66,7 +67,7 @@ class _LoginState extends State<Login> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(color: Colors.grey.shade300),
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         color: Colors.black12,
                         blurRadius: 6,
@@ -210,9 +211,7 @@ class _LoginState extends State<Login> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>Biganaly(
-                                        
-                                        )),
+                                    builder: (context) => DashboardView()),
                               );
                             }
                           },
@@ -227,7 +226,7 @@ class _LoginState extends State<Login> {
                       ),
                       const SizedBox(height: 12),
                       Row(
-                        children: [
+                        children: const [
                           Expanded(
                             child: Divider(
                               color: Color(0xFFC40CC4),
@@ -235,7 +234,7 @@ class _LoginState extends State<Login> {
                               endIndent: 8,
                             ),
                           ),
-                          const Text(
+                          Text(
                             "أو",
                             style: TextStyle(
                                 color: Color(0xFFC40CC4), fontFamily: "Cairo"),

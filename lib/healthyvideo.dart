@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_smartapp/chat.dart';
 
 class Healthyvideo extends StatelessWidget {
-  const Healthyvideo ({super.key});
+  const Healthyvideo({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +42,9 @@ class Healthyvideo extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-                  const Text('تحميل التحليل الصحي'
-                  ,style: TextStyle(
+                  const Text(
+                    'تحميل التحليل الصحي',
+                    style: TextStyle(
                       color: Color(0xFFC40CC4),
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -73,100 +74,68 @@ class Healthyvideo extends StatelessWidget {
             right: 0,
             child: CustomBottomBar(),
           ),
-      
-      
-  //البوكس الأبيض مصغر وفي منتصف الشاشة
-            Center(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.only(top: 100),
-              
-                
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 10), // بدل اللوقو
-                      Image.asset(
-                        "assets/Group-1984079920.png",
-                        height: 150,
-                      ),
-                      const SizedBox(height: 19),
 
-                      Container(
-                        width:300,
-                        height: 50,
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              Color(0xFFC40CC4),
-                              Color(0xFF381DFF),
-                              Color(0xFF1DFFE8),
-                            ],
-                            stops: [0.0, 0.69, 0.97],
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                          ),
-                          borderRadius: BorderRadius.all(Radius.circular(12)),
+          //البوكس الأبيض مصغر وفي منتصف الشاشة
+          Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.only(top: 100),
+              child: Column(
+                children: [
+                  const SizedBox(height: 10), // بدل اللوقو
+                  Image.asset(
+                    "assets/Group-1984079920.png",
+                    height: 150,
+                  ),
+                  const SizedBox(height: 19),
+
+                  Container(
+                    width: 300,
+                    height: 50,
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          Color(0xFFC40CC4),
+                          Color(0xFF381DFF),
+                          Color(0xFF1DFFE8),
+                        ],
+                        stops: [0.0, 0.69, 0.97],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                    ),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.transparent,
+                        shadowColor: Colors.transparent,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
                         ),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            shadowColor: Colors.transparent,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                          onPressed: () {
-Navigator.push(
+                      ),
+                      onPressed: () {
+                        Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => Chat()),
                         );
-                          },
-                          child: const Text(
-                            "البدء بالتحليل",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "Cairo"),
-                          ),
-                        ),
+                      },
+                      child: const Text(
+                        "البدء بالتحليل",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "Cairo"),
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
+            ),
+          ),
         ],
       ),
     );
   }
 }
-
-
 
 //  ويدجت الأزرار (بار داخلي)
 class CustomBottomBar extends StatelessWidget {
@@ -180,11 +149,17 @@ class CustomBottomBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: const [
           BottomNavItem(title: 'الإعدادات', route: '/Settings'),
-          SizedBox(height: 2,),
+          SizedBox(
+            height: 2,
+          ),
           BottomNavItem(title: 'AI Chat', route: '/chat'),
-          SizedBox(height: 2,),
-          BottomNavItem(title:  'التحليلات', route: '/Biganaly'),
-          SizedBox(height: 2,),
+          SizedBox(
+            height: 2,
+          ),
+          BottomNavItem(title: 'التحليلات', route: '/Biganaly'),
+          SizedBox(
+            height: 2,
+          ),
           BottomNavItem(title: 'الرئيسية', route: '/home'),
         ],
       ),
@@ -208,8 +183,7 @@ class BottomNavItem extends StatelessWidget {
       child: Container(
         width: 95,
         height: 95,
-        margin:
-            const EdgeInsets.all(0), //  مسافة بين الأزرار
+        margin: const EdgeInsets.all(0), //  مسافة بين الأزرار
         decoration: BoxDecoration(
           //  التدرج اللوني
           gradient: const LinearGradient(
@@ -217,7 +191,7 @@ class BottomNavItem extends StatelessWidget {
             end: Alignment.centerRight,
             colors: [
               Color(0xFFCEAAEE), // موف فاتح
-    Colors.white,   // #C40CC4 - 100% opacity
+              Colors.white, // #C40CC4 - 100% opacity
             ],
             stops: [0.0, 0.79],
           ),

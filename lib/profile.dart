@@ -167,15 +167,15 @@ class Profile extends StatelessWidget {
             border: Border.all(color: Color(0xFFCEAAEE), width: 1),
           ),
           child: Stack(
-            children: [
-              const TextField(
+            children: const [
+              TextField(
                 decoration: InputDecoration(
                   contentPadding:
                       EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                   border: InputBorder.none,
                 ),
               ),
-              const Positioned(
+              Positioned(
                 left: 16,
                 bottom: 4,
                 child: Text(

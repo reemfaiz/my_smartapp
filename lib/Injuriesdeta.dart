@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_smartapp/Injurievidio.dart';
-import 'package:my_smartapp/Video.dart';
-import 'package:my_smartapp/healthyvideo.dart';
 
 class Injuriesdeta extends StatelessWidget {
-  const Injuriesdeta  ({super.key});
+  const Injuriesdeta({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +42,9 @@ class Injuriesdeta extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-                  const Text('تحميل تحليل الإصابات'
-                  ,style: TextStyle(
+                  const Text(
+                    'تحميل تحليل الإصابات',
+                    style: TextStyle(
                       color: Color(0xFFC40CC4),
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -75,118 +74,87 @@ class Injuriesdeta extends StatelessWidget {
             right: 0,
             child: CustomBottomBar(),
           ),
-      
-      
-  //البوكس الأبيض مصغر وفي منتصف الشاشة
-            Center(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.only(top: 100),
-                child: Container(
-                  width:
-                      MediaQuery.of(context).size.width * 0.85, // تصغير العرض
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: Colors.grey.shade300),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 6,
-                        offset: Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 10), // بدل اللوقو
-                      Image.asset(
-                        "assets/Isolation_Mod-e.png",
-                        height: 80,
-                      ), //صوره الحمايه
 
-                      const SizedBox(height: 19),
+          //البوكس الأبيض مصغر وفي منتصف الشاشة
+          Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.only(top: 100),
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.85, // تصغير العرض
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: Colors.grey.shade300),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 6,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 10), // بدل اللوقو
+                    Image.asset(
+                      "assets/Isolation_Mod-e.png",
+                      height: 80,
+                    ), //صوره الحمايه
 
-                      Container(
-                        width: double.infinity,
-                        height: 50,
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              Color(0xFFC40CC4),
-                              Color(0xFF381DFF),
-                              Color(0xFF1DFFE8),
-                            ],
-                            stops: [0.0, 0.69, 0.97],
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                          ),
-                          borderRadius: BorderRadius.all(Radius.circular(12)),
+                    const SizedBox(height: 19),
+
+                    Container(
+                      width: double.infinity,
+                      height: 50,
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Color(0xFFC40CC4),
+                            Color(0xFF381DFF),
+                            Color(0xFF1DFFE8),
+                          ],
+                          stops: [0.0, 0.69, 0.97],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
                         ),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            shadowColor: Colors.transparent,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                          onPressed: () {  Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Injurievidio()
-                                    ),
-                              );
-
-                          },
-                          child: const Text(
-                            "تحميل الفيديو الرياضي",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "Cairo"),
+                        borderRadius: BorderRadius.all(Radius.circular(12)),
+                      ),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.transparent,
+                          shadowColor: Colors.transparent,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
                           ),
                         ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Injurievidio()),
+                          );
+                        },
+                        child: const Text(
+                          "تحميل الفيديو الرياضي",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Cairo"),
+                        ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
+          ),
         ],
       ),
     );
   }
 }
-
-
 
 //  ويدجت الأزرار (بار داخلي)
 class CustomBottomBar extends StatelessWidget {
@@ -200,11 +168,17 @@ class CustomBottomBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: const [
           BottomNavItem(title: 'الإعدادات', route: '/Settings'),
-          SizedBox(height: 2,),
+          SizedBox(
+            height: 2,
+          ),
           BottomNavItem(title: 'AI Chat', route: '/chat'),
-          SizedBox(height: 2,),
-          BottomNavItem(title:  'التحليلات', route: '/Biganaly'),
-          SizedBox(height: 2,),
+          SizedBox(
+            height: 2,
+          ),
+          BottomNavItem(title: 'التحليلات', route: '/Biganaly'),
+          SizedBox(
+            height: 2,
+          ),
           BottomNavItem(title: 'الرئيسية', route: '/home'),
         ],
       ),
@@ -228,8 +202,7 @@ class BottomNavItem extends StatelessWidget {
       child: Container(
         width: 95,
         height: 95,
-        margin:
-            const EdgeInsets.all(0), //  مسافة بين الأزرار
+        margin: const EdgeInsets.all(0), //  مسافة بين الأزرار
         decoration: BoxDecoration(
           //  التدرج اللوني
           gradient: const LinearGradient(
@@ -237,7 +210,7 @@ class BottomNavItem extends StatelessWidget {
             end: Alignment.centerRight,
             colors: [
               Color(0xFFCEAAEE), // موف فاتح
-    Colors.white,   // #C40CC4 - 100% opacity
+              Colors.white, // #C40CC4 - 100% opacity
             ],
             stops: [0.0, 0.79],
           ),

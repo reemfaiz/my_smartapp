@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:my_smartapp/Login.dart';
 
-
 class DELEDT extends StatelessWidget {
-  const DELEDT({Key? key}) : super(key: key);
+  const DELEDT({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +15,7 @@ class DELEDT extends StatelessWidget {
           children: [
             Positioned.fill(
               top: -500,
-          left: -100,
+              left: -100,
               child: Opacity(
                 opacity: 0.1,
                 child: Image.asset(
@@ -28,7 +26,7 @@ class DELEDT extends StatelessWidget {
 
             Positioned(
               bottom: 6,
-            right: 0,
+              right: 0,
               child: Opacity(
                 opacity: 0.3,
                 child: Image.asset(
@@ -66,7 +64,7 @@ class DELEDT extends StatelessWidget {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(color: Colors.grey.shade300),
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         color: Colors.black12,
                         blurRadius: 6,
@@ -77,11 +75,13 @@ class DELEDT extends StatelessWidget {
                   child: Column(
                     children: [
                       const SizedBox(height: 10), // بدل اللوقو
-                     Image.asset("assets/Shield.png",height: 100,),//صوره الحمايه
-                    
+                      Image.asset(
+                        "assets/Shield.png",
+                        height: 100,
+                      ), //صوره الحمايه
+
                       const SizedBox(height: 3),
-                      
-                  
+
                       Container(
                         width: double.infinity,
                         height: 50,
@@ -107,14 +107,14 @@ class DELEDT extends StatelessWidget {
                             ),
                           ),
                           onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const Login()),
-                              );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Login()),
+                            );
                           },
                           child: const Text(
-                          'تم حذف الحساب' ,
+                            'تم حذف الحساب',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -122,7 +122,6 @@ class DELEDT extends StatelessWidget {
                           ),
                         ),
                       ),
-                    
                     ],
                   ),
                 ),
@@ -133,5 +132,4 @@ class DELEDT extends StatelessWidget {
       ),
     );
   }
-
-  }
+}

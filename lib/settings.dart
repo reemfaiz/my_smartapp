@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class Settings extends StatelessWidget {
   const Settings({super.key});
-  
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +26,8 @@ class Settings extends StatelessWidget {
           // العنوان والسهم
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 40),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 40),
               child: Row(
                 children: [
                   GestureDetector(
@@ -80,12 +80,13 @@ class Settings extends StatelessWidget {
               padding: const EdgeInsets.only(top: 70),
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.85,
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.6),
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(color: Colors.purple.withOpacity(0.7)),
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                       color: Colors.black12,
                       blurRadius: 6,
