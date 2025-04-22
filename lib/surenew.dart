@@ -1,24 +1,112 @@
 import 'package:flutter/material.dart';
 import 'package:my_smartapp/done.dart';
+import 'package:my_smartapp/services/auth_service.dart'; // Import your AuthService
+import 'dart:convert';
 
 class Surenew extends StatefulWidget {
-  const Surenew({super.key});
+  final Map<String, String> userData;
+
+  const Surenew({super.key, required this.userData});
 
   @override
-  State<Surenew> createState() => _SurenewState();
+  _SurenewState createState() => _SurenewState();
 }
 
 class _SurenewState extends State<Surenew> {
   final _formKey = GlobalKey<FormState>();
   final List<TextEditingController> codeControllers =
       List.generate(4, (index) => TextEditingController());
+  String _errorMessage = '';
+  final SmartAuthService _authService =
+      SmartAuthService(); //Instance of AuthService
 
   bool isCodeComplete() {
     return codeControllers.every((controller) => controller.text.isNotEmpty);
   }
 
   @override
+  void dispose() {
+    for (var controller in codeControllers) {
+      controller.dispose();
+    }
+    super.dispose();
+  }
+
+  Future<void> _handleVerification() async {
+    setState(() {
+      _errorMessage = '';
+    });
+
+    if (_formKey.currentState!.validate() && isCodeComplete()) {
+      // Combine the verification code
+      String verificationCode =
+          codeControllers.map((c) => c.text).join(); //combine the code
+      // Include the verification code and ALL user data.  Important.
+      Map<String, String> verificationData = {
+        'phone': widget.userData['phoneNumber'] ?? '',
+        'code': verificationCode,
+      };
+
+      try {
+        // 1. Call the validateOtp service first
+        final otpResponse = await _authService.verify(
+            widget.userData['email']!, verificationCode);
+
+        if (otpResponse.statusCode == 200) {
+          // OTP is valid, proceed with registration
+          print('OTP verification successful!');
+          // 2. Call the register service
+          final registerResponse = await _authService.register(widget.userData);
+
+          if (registerResponse.statusCode == 200) {
+            // Registration successful, navigate to the DONE screen.
+            print('Registration successful!');
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const DONE()),
+            );
+          } else {
+            // Registration failed, show the error message.
+            Map<String, dynamic> errorResponse =
+                json.decode(registerResponse.body);
+            String errorMessage =
+                errorResponse['message'] ?? 'Failed to register user.';
+            setState(() {
+              _errorMessage = errorMessage;
+            });
+            print('Registration failed: $errorMessage');
+          }
+        } else {
+          // OTP verification failed, show error
+          Map<String, dynamic> errorResponse = json.decode(otpResponse.body);
+          String errorMessage = errorResponse['message'] ?? 'الرمز خاطى';
+          setState(() {
+            _errorMessage = errorMessage;
+          });
+          print('OTP verification failed: $errorMessage');
+        }
+      } catch (error) {
+        // Handle network or other errors.
+        setState(() {
+          _errorMessage = 'حصل خطأ';
+        });
+        print('Error: $error');
+      }
+    } else {
+      setState(() {
+        _errorMessage = 'الرجاء ادخال جميع الحقول';
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    // Access user data from widget.userData
+    final String username = widget.userData['username'] ??
+        ''; // Provide default values in case of null.  VERY IMPORTANT.
+    final String email = widget.userData['email'] ?? '';
+    final String phoneNumber = widget.userData['phoneNumber'] ?? '';
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light(useMaterial3: true),
@@ -107,9 +195,9 @@ class _SurenewState extends State<Surenew> {
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 8),
-                        const Text(
-                          "تم إرسال الرمز إلى الرقم ****456",
-                          style: TextStyle(
+                        Text(
+                          "تم إرسال الرمز إلى الرقم $phoneNumber", // Use phoneNumber
+                          style: const TextStyle(
                             fontFamily: "Cairo",
                             fontSize: 14,
                             color: Colors.grey,
@@ -117,8 +205,6 @@ class _SurenewState extends State<Surenew> {
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 24),
-
-                        // مربعات الرمز
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: List.generate(4, (index) {
@@ -128,6 +214,7 @@ class _SurenewState extends State<Surenew> {
                                 controller: codeControllers[index],
                                 textAlign: TextAlign.center,
                                 keyboardType: TextInputType.number,
+                                maxLength: 1, // Limit to 1 character
                                 style: const TextStyle(
                                   fontSize: 20,
                                   fontFamily: "Cairo",
@@ -135,6 +222,8 @@ class _SurenewState extends State<Surenew> {
                                   color: Color(0xFF381DFF),
                                 ),
                                 decoration: InputDecoration(
+                                  counterText:
+                                      '', //remove the character counter,
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(8),
                                     borderSide: const BorderSide(
@@ -152,14 +241,17 @@ class _SurenewState extends State<Surenew> {
                                   }
                                   return null;
                                 },
+                                onChanged: (value) {
+                                  if (value.length == 1 && index < 3) {
+                                    // Move focus to the next input field
+                                    FocusScope.of(context).nextFocus();
+                                  }
+                                },
                               ),
                             );
                           }),
                         ),
-
                         const SizedBox(height: 24),
-
-                        // زر التحقق
                         Container(
                           width: double.infinity,
                           height: 50,
@@ -184,21 +276,10 @@ class _SurenewState extends State<Surenew> {
                                 borderRadius: BorderRadius.circular(12),
                               ),
                             ),
-                            onPressed: () {
-                              if (_formKey.currentState!.validate() &&
-                                  isCodeComplete()) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const DONE()),
-                                );
-                              } else {
-                                setState(
-                                    () {}); // لإظهار رسالة الخطأ في المربعات
-                              }
-                            },
+                            onPressed:
+                                _handleVerification, // Call the verification method.
                             child: const Text(
-                              "تسجيل اشتراك جديد",
+                              "تحقق",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -207,9 +288,7 @@ class _SurenewState extends State<Surenew> {
                             ),
                           ),
                         ),
-
                         const SizedBox(height: 12),
-
                         TextButton(
                           onPressed: () {
                             // إعادة إرسال الرمز
@@ -222,7 +301,19 @@ class _SurenewState extends State<Surenew> {
                               fontSize: 14,
                             ),
                           ),
-                        )
+                        ),
+                        if (_errorMessage.isNotEmpty) //show error message.
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: Text(
+                              _errorMessage,
+                              style: const TextStyle(
+                                color: Colors.red,
+                                fontFamily: "Cairo",
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
                       ],
                     ),
                   ),

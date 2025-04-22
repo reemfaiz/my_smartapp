@@ -36,7 +36,6 @@ class MyApp extends StatelessWidget {
         '/Surepass': (context) => const Surepass(),
         '/DONE': (context) => const DONE(),
         '/Newlogic': (context) => const Newlogic(),
-        '/Surenew': (context) => const Surenew(),
         '/AnalysisScreen': (context) => const AnalysisScreen(),
         '/Settings': (context) => const Settings(),
         '/Profile': (context) => const Profile(),

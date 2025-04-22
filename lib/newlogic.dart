@@ -1,76 +1,136 @@
-import 'package:flutter/material.dart'; // استيراد مكتبة تصميم الواجهات
-import 'package:my_smartapp/surenew.dart'; // استيراد صفحة التحقق بعد التسجيل
+import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:my_smartapp/surenew.dart';
+import 'package:my_smartapp/services/auth_service.dart'; // استيراد خدمة المصادقة
 
 class Newlogic extends StatefulWidget {
   const Newlogic({super.key});
 
   @override
-  State<Newlogic> createState() => _NewlogicState(); // ربط الكلاس بالـ state
+  State<Newlogic> createState() => _NewlogicState();
 }
 
 class _NewlogicState extends State<Newlogic> {
-  final _formKey =
-      GlobalKey<FormState>(); // مفتاح لربط النموذج مع التحقق من الحقول
-
-  bool isChecked = false; // لحفظ حالة زر "تذكرني"
-
-  // Controllers للتحكم في النص المدخل داخل الحقول
+  final _formKey = GlobalKey<FormState>();
+  final SmartAuthService _authService =
+      SmartAuthService(); // إنشاء مثيل لخدمة المصادقة
+  bool isChecked = false;
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmController = TextEditingController();
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
+  String _errorMessage = ''; // متغير لعرض رسائل الخطأ
 
-  // دالة تعيد تصميم الحقل بشكل موحد، مع خيار لإضافة أيقونة أو عنصر على اليمين
+  // دالة التسجيل
+  Future<void> _handleRegister() async {
+    setState(() {
+      _errorMessage = ''; // مسح أي خطأ سابق
+    });
+
+    if (_formKey.currentState!.validate()) {
+      // تحقق من صحة الحقول
+      final username = usernameController.text.trim();
+      final password = passwordController.text.trim();
+      final confirm = confirmController.text.trim();
+      final email = emailController.text.trim();
+      final phone = phoneController.text.trim();
+
+      try {
+        final response = await _authService.sendOTP(email);
+
+        if (response.statusCode == 200) {
+          // التسجيل ناجح
+          print("sent otp successful");
+          // هنا يمكنك الانتقال إلى صفحة تأكيد الحساب أو أي صفحة أخرى
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Surenew(
+                userData: {
+                  "username": username,
+                  "email": email,
+                  "phoneNumber": phone,
+                  "password": password,
+                  "confirmPassword": confirm,
+                },
+              ),
+            ),
+          );
+        } else {
+          // التسجيل فشل
+          Map<String, dynamic> errorResponse = json.decode(response.body);
+          String errorMessage = errorResponse['message'] ??
+              'Failed to register. Please check your information.'; // رسالة خطأ افتراضية
+          setState(() {
+            _errorMessage = errorMessage;
+          });
+          print('Registration failed: $errorMessage');
+        }
+      } catch (error) {
+        // خطأ في الاتصال أو غيره
+        print('Error during registration: $error');
+        setState(() {
+          _errorMessage =
+              'An unexpected error occurred. Please try again later.';
+        });
+      }
+    }
+  }
+
   InputDecoration customDecoration(String label, {Widget? suffix}) {
     return InputDecoration(
-      labelText: label, // عنوان الحقل
+      labelText: label,
       labelStyle: TextStyle(
-        fontFamily: "Cairo", // نوع الخط
-        color: Color(0xFFC40CC4).withOpacity(0.6), // لون عنوان الحقل
+        fontFamily: "Cairo",
+        color: Color(0xFFC40CC4).withOpacity(0.6),
       ),
-      suffixIcon: suffix, // عنصر مضاف في نهاية الحقل (مثل زر أو checkbox)
+      suffixIcon: suffix,
       enabledBorder: OutlineInputBorder(
-        // شكل الحقل عند الحالة العادية
         borderSide: BorderSide(color: Color(0xFFC40CC4), width: 1),
         borderRadius: BorderRadius.circular(12),
       ),
       focusedBorder: OutlineInputBorder(
-        // شكل الحقل عند التركيز
         borderSide: BorderSide(color: Color(0xFFC40CC4), width: 2),
         borderRadius: BorderRadius.circular(12),
       ),
       errorBorder: OutlineInputBorder(
-        // شكل الحقل عند وجود خطأ
-        borderSide: BorderSide(color: Colors.red),
+        borderSide: const BorderSide(color: Colors.red),
         borderRadius: BorderRadius.circular(12),
       ),
       focusedErrorBorder: OutlineInputBorder(
-        // شكل الحقل عند الخطأ والتركيز
-        borderSide: BorderSide(color: Colors.red),
+        borderSide: const BorderSide(color: Colors.red),
         borderRadius: BorderRadius.circular(12),
       ),
     );
   }
 
   @override
+  void dispose() {
+    // تخلص من الـ Controllers
+    usernameController.dispose();
+    passwordController.dispose();
+    confirmController.dispose();
+    emailController.dispose();
+    phoneController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // بداية التطبيق المصغر داخل الصفحة
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.light(useMaterial3: true), // تفعيل تصميم Material 3
+      theme: ThemeData.light(useMaterial3: true),
       home: Scaffold(
         backgroundColor: Colors.white,
         body: Stack(
-          // ترتيب العناصر فوق بعض
           children: [
-            // زر الإغلاق للرجوع
             Positioned(
               top: 50,
               left: 20,
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pop(context); // يرجع للصفحة السابقة
+                  Navigator.pop(context);
                 },
                 child: Image.asset(
                   'assets/icon_close (1).png',
@@ -79,7 +139,6 @@ class _NewlogicState extends State<Newlogic> {
                 ),
               ),
             ),
-            // خلفية علوية باهتة
             Positioned.fill(
               top: -500,
               right: -100,
@@ -88,7 +147,6 @@ class _NewlogicState extends State<Newlogic> {
                 child: Image.asset("assets/image.png"),
               ),
             ),
-            // خلفية سفلية باهتة
             Positioned(
               bottom: 6,
               left: 0,
@@ -102,7 +160,6 @@ class _NewlogicState extends State<Newlogic> {
                 ),
               ),
             ),
-            // عرض الشعار في منتصف الصفحة
             Positioned(
               top: 150,
               left: 0,
@@ -114,14 +171,11 @@ class _NewlogicState extends State<Newlogic> {
                 ),
               ),
             ),
-            // الحاوية الرئيسية البيضاء لحقول الإدخال
             Center(
               child: SingleChildScrollView(
-                // لدعم التمرير في الأجهزة الصغيرة
                 padding: const EdgeInsets.only(top: 180),
                 child: Container(
-                  width: MediaQuery.of(context).size.width *
-                      0.85, // 85٪ من عرض الشاشة
+                  width: MediaQuery.of(context).size.width * 0.85,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
                   decoration: BoxDecoration(
@@ -129,7 +183,6 @@ class _NewlogicState extends State<Newlogic> {
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(color: Colors.grey.shade300),
                     boxShadow: const [
-                      // ظل الحاوية
                       BoxShadow(
                         color: Colors.black12,
                         blurRadius: 6,
@@ -138,13 +191,10 @@ class _NewlogicState extends State<Newlogic> {
                     ],
                   ),
                   child: Form(
-                    // لربط الحقول بالتحقق منها
                     key: _formKey,
                     child: Column(
                       children: [
                         const SizedBox(height: 10),
-
-                        // حقل اسم المستخدم
                         TextFormField(
                           controller: usernameController,
                           textDirection: TextDirection.rtl,
@@ -158,8 +208,6 @@ class _NewlogicState extends State<Newlogic> {
                           },
                         ),
                         const SizedBox(height: 16),
-
-                        // حقل كلمة المرور مع زر "تذكرني"
                         TextFormField(
                           controller: passwordController,
                           textDirection: TextDirection.rtl,
@@ -172,21 +220,20 @@ class _NewlogicState extends State<Newlogic> {
                               children: [
                                 Text(
                                   'تذكرني',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 12,
                                     fontFamily: "Cairo",
                                     color: Color(0xFFC40CC4),
                                   ),
                                 ),
                                 Checkbox(
-                                  // مربع "تذكرني"
                                   value: isChecked,
                                   onChanged: (value) {
                                     setState(() {
                                       isChecked = value!;
                                     });
                                   },
-                                  activeColor: Color(0xFFC40CC4),
+                                  activeColor: const Color(0xFFC40CC4),
                                   visualDensity: VisualDensity.compact,
                                 ),
                               ],
@@ -200,8 +247,6 @@ class _NewlogicState extends State<Newlogic> {
                           },
                         ),
                         const SizedBox(height: 16),
-
-                        // تأكيد كلمة المرور
                         TextFormField(
                           controller: confirmController,
                           textDirection: TextDirection.rtl,
@@ -219,8 +264,6 @@ class _NewlogicState extends State<Newlogic> {
                           },
                         ),
                         const SizedBox(height: 16),
-
-                        // البريد الإلكتروني
                         TextFormField(
                           controller: emailController,
                           keyboardType: TextInputType.emailAddress,
@@ -238,8 +281,6 @@ class _NewlogicState extends State<Newlogic> {
                           },
                         ),
                         const SizedBox(height: 16),
-
-                        // رقم الهاتف
                         TextFormField(
                           controller: phoneController,
                           keyboardType: TextInputType.phone,
@@ -254,14 +295,11 @@ class _NewlogicState extends State<Newlogic> {
                           },
                         ),
                         const SizedBox(height: 20),
-
-                        // زر "تسجيل اشتراك جديد"
                         Container(
                           width: double.infinity,
                           height: 50,
                           decoration: const BoxDecoration(
                             gradient: LinearGradient(
-                              // تدرج لوني للزر
                               colors: [
                                 Color(0xFFC40CC4),
                                 Color(0xFF381DFF),
@@ -281,16 +319,7 @@ class _NewlogicState extends State<Newlogic> {
                                 borderRadius: BorderRadius.circular(12),
                               ),
                             ),
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                // إذا تم التحقق من الحقول → انتقل لصفحة Surenew
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const Surenew()),
-                                );
-                              }
-                            },
+                            onPressed: _handleRegister, // استدعاء دالة التسجيل
                             child: const Text(
                               "تسجيل اشتراك جديد",
                               style: TextStyle(
@@ -301,6 +330,19 @@ class _NewlogicState extends State<Newlogic> {
                             ),
                           ),
                         ),
+                        // عرض رسالة الخطأ هنا
+                        if (_errorMessage.isNotEmpty)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: Text(
+                              _errorMessage,
+                              style: const TextStyle(
+                                color: Colors.red,
+                                fontFamily: "Cairo",
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
                       ],
                     ),
                   ),

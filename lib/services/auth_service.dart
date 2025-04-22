@@ -107,26 +107,17 @@ class SmartAuthService {
   }
 
   // POST: /api/Auth/SendOTP
-  Future<http.Response> sendOTP(Map<String, dynamic> body) async {
+  Future<http.Response> sendOTP(String email) async {
     final response = await http.post(
-      Uri.parse('$baseUrl/api/Auth/SendOTP'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(body),
+      Uri.parse('$baseUrl/api/Auth/SendOTP?email=$email'),
     );
     return response;
   }
 
   // POST: /api/Auth/verify
-  Future<http.Response> verify(Map<String, dynamic> body) async {
-    final response = await http.post(
-      Uri.parse('$baseUrl/api/Auth/verify'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(body),
-    );
+  Future<http.Response> verify(String email, String code) async {
+    final response = await http
+        .post(Uri.parse('$baseUrl/api/Auth/verify?email=$email&code=$code'));
     return response;
   }
 }
