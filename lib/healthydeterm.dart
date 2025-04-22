@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_smartapp/Video.dart';
 import 'package:my_smartapp/healthyvideo.dart';
 
 class Healthydeterm extends StatelessWidget {

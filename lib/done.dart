@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:my_smartapp/biganaly.dart';
 import 'package:my_smartapp/views/features/dashboard.dart';
 
 class DONE extends StatelessWidget {

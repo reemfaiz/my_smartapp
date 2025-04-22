@@ -16,6 +16,7 @@ import 'package:my_smartapp/settings.dart';
 import 'package:my_smartapp/surenew.dart';
 import 'package:my_smartapp/surepass.dart';
 import 'package:my_smartapp/views/features/dashboard.dart';
+import 'package:my_smartapp/views/splash/logo.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,9 +29,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: " /Login",
+      initialRoute: " /splash",
       routes: {
-        '/': (context) => const Login(),
+        '/': (context) => const LogoView(),
         '/Nopass': (context) => const Nopass(),
         '/Surepass': (context) => const Surepass(),
         '/DONE': (context) => const DONE(),
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
         '/Matchstats': (context) => const Matchstats(),
         '/Biganaly': (context) => const Biganaly(),
         '/home': (context) => const DashboardView(),
+        '/login': (context) => const Login()
       },
     );
   }

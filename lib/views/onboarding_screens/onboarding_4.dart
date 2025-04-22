@@ -1,8 +1,8 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:my_smartapp/Login.dart';
 import 'package:my_smartapp/helpers/navigator.dart';
-import 'package:my_smartapp/views/features/dashboard.dart';
 import 'package:my_smartapp/widgets/onboarding_progress.dart';
 
 class OnBoardingFourView extends StatelessWidget {
@@ -103,7 +103,7 @@ class OnBoardingFourView extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       Future.microtask(() {
-                        context.removeUntil(view: DashboardView());
+                        context.removeUntil(view: Login());
                       });
                     },
                     child: Image.asset('assets/icons/arrow.png'),

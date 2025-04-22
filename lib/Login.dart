@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:my_smartapp/analys.dart';
-import 'package:my_smartapp/biganaly.dart';
-
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'package:my_smartapp/newlogic.dart';
 import 'package:my_smartapp/nopass.dart';
-import 'package:my_smartapp/page.dart';
+import 'package:my_smartapp/services/auth_service.dart';
 import 'package:my_smartapp/views/features/dashboard.dart';
 
 class Login extends StatefulWidget {
@@ -15,9 +14,48 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final SmartAuthService _authService = SmartAuthService();
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   bool isChecked = false;
+  String _errorMessage = ''; // Added to store and display error messages.
+
+  Future<void> _handleLogin() async {
+    print("here");
+    setState(() {
+      _errorMessage = ''; // Clear any previous error message.
+    });
+    final email = usernameController.text.trim();
+    final password = passwordController.text.trim();
+    try {
+      final response = await _authService.login({
+        'email': email,
+        'password': password,
+      });
+
+      if (response.statusCode == 200) {
+        print("success");
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => DashboardView()),
+        );
+      } else {
+        //handle different error codes
+        Map<String, dynamic> errorResponse = json.decode(response.body);
+        String errorMessage = errorResponse['message'] ??
+            'Failed to login. Please check your credentials.'; //Provide a default
+        setState(() {
+          _errorMessage = errorMessage;
+        });
+        print("error");
+      }
+    } catch (error) {
+      print('Error during login: $error');
+      setState(() {
+        _errorMessage = 'معلومات الدخول غير صحيحه';
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -205,14 +243,7 @@ class _LoginState extends State<Login> {
                                 ),
                               );
                             } else {
-                              print("اسم المستخدم: $user");
-                              print("كلمة المرور: $pass");
-                              // هنا تقدر تنقل لصفحة المستخدم أو تحقق الدخول
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => DashboardView()),
-                              );
+                              _handleLogin();
                             }
                           },
                           child: const Text(
@@ -275,6 +306,19 @@ class _LoginState extends State<Login> {
                         ],
                       ),
                       const SizedBox(height: 12),
+                      // Display the error message here
+                      if (_errorMessage.isNotEmpty)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Text(
+                            _errorMessage,
+                            style: const TextStyle(
+                              color: Colors.red,
+                              fontFamily: "Cairo",
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
                     ],
                   ),
                 ),
